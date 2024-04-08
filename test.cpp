@@ -51,7 +51,7 @@ void displayQuestion(const Question &q)
   std::cout << q.question << std::endl;
   for (int i = 0; i < q.numOptions; ++i)
   {
-    std::cout << i + 1 << ". " << q.options[i] << std::endl;
+    std::cout << "\t" << i + 1 << ". " << q.options[i] << std::endl;
   }
 }
 
@@ -87,7 +87,7 @@ void conductTest(const Question questions[], int numQuestions)
 int main()
 {
   const char *filename = "questions.txt"; // Имя файла с вопросами
-  const int MAX_QUESTIONS = 10;           // Максимальное количество вопросов
+  const int MAX_QUESTIONS = 20;           // Максимальное количество вопросов
   Question questions[MAX_QUESTIONS];
   int numQuestions = 0;
 
