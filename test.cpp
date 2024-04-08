@@ -1,50 +1,42 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 
-using namespace std;
-
-const int MAX_OPTIONS = 5; // Максимальное количество вариантов ответов
+const int MAX_QUESTION_LENGTH = 256; // Максимальная длина вопроса
+const int MAX_OPTIONS = 5;           // Максимальное количество вариантов ответов
 
 // Структура для хранения вопроса и ответов
 struct Question
 {
-  string question;
-  string options[MAX_OPTIONS];
+  char question[MAX_QUESTION_LENGTH];
+  char options[MAX_OPTIONS][MAX_QUESTION_LENGTH];
   int numOptions;
   int correctAnswerIndex;
 };
 
 // Функция для чтения вопросов из файла
-bool readQuestionsFromFile(const string &filename, Question questions[], int &numQuestions)
+bool readQuestionsFromFile(const char *filename, Question questions[], int &numQuestions)
 {
-  ifstream file(filename);
+  std::ifstream file(filename);
   if (!file.is_open())
   {
-    cerr << "Unable to open file: " << filename << endl;
+    std::cerr << "Unable to open file: " << filename << std::endl;
     return false;
   }
 
   numQuestions = 0;
-  string line;
-  while (getline(file, line))
+  while (file.peek() != EOF)
   {
-    if (line.empty())
-      continue;
-
-    questions[numQuestions].question = line;
-
-    getline(file, line); // Считываем количество вариантов ответов
-    questions[numQuestions].numOptions = stoi(line);
+    file.getline(questions[numQuestions].question, MAX_QUESTION_LENGTH);
+    file >> questions[numQuestions].numOptions;
+    file.ignore(); // Пропускаем символ новой строки
 
     for (int i = 0; i < questions[numQuestions].numOptions; ++i)
     {
-      getline(file, line);
-      questions[numQuestions].options[i] = line;
+      file.getline(questions[numQuestions].options[i], MAX_QUESTION_LENGTH);
     }
 
-    getline(file, line); // Считываем правильный ответ
-    questions[numQuestions].correctAnswerIndex = stoi(line);
+    file >> questions[numQuestions].correctAnswerIndex;
+    file.ignore(); // Пропускаем символ новой строки
 
     ++numQuestions;
   }
@@ -56,10 +48,10 @@ bool readQuestionsFromFile(const string &filename, Question questions[], int &nu
 // Функция для вывода вопроса и вариантов ответов
 void displayQuestion(const Question &q)
 {
-  cout << q.question << endl;
+  std::cout << q.question << std::endl;
   for (int i = 0; i < q.numOptions; ++i)
   {
-    cout << i + 1 << ". " << q.options[i] << endl;
+    std::cout << i + 1 << ". " << q.options[i] << std::endl;
   }
 }
 
@@ -73,29 +65,29 @@ void conductTest(const Question questions[], int numQuestions)
     displayQuestion(questions[i]);
 
     int userAnswer;
-    cout << "Your answer: ";
-    cin >> userAnswer;
+    std::cout << "Your answer: ";
+    std::cin >> userAnswer;
 
     if (userAnswer == questions[i].correctAnswerIndex + 1)
     {
-      cout << "Correct!" << endl;
+      std::cout << "Correct!" << std::endl;
       ++score;
     }
     else
     {
-      cout << "Incorrect!" << endl;
+      std::cout << "Incorrect!" << std::endl;
     }
 
-    cout << endl;
+    std::cout << std::endl;
   }
 
-  cout << "Test completed. Your score: " << score << " out of " << numQuestions << endl;
+  std::cout << "Test completed. Your score: " << score << " out of " << numQuestions << std::endl;
 }
 
 int main()
 {
-  const string filename = "questions.txt"; // Имя файла с вопросами
-  const int MAX_QUESTIONS = 10;            // Максимальное количество вопросов
+  const char *filename = "questions.txt"; // Имя файла с вопросами
+  const int MAX_QUESTIONS = 10;           // Максимальное количество вопросов
   Question questions[MAX_QUESTIONS];
   int numQuestions = 0;
 
