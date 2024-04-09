@@ -2,42 +2,77 @@
 #include <fstream>
 #include <string>
 
+using namespace std;
+
 const int MAX_OPTIONS = 5; // Максимальное количество вариантов ответов
 
 // Структура для хранения вопроса и ответов
 struct Question
 {
-  std::string question;
-  std::string options[MAX_OPTIONS];
+  string question;
+  string options[MAX_OPTIONS];
   int numOptions;
-  std::string correctAnswer;
+  string correctAnswer;
   int points;
 };
+// Функция для чтения вопросов из файла
+bool readQuestionsFromFile(const string &filename, Question questions[], int &numQuestions);
+
+// Функция для вывода вопроса и вариантов ответов
+void displayQuestion(const Question &q);
+
+// Функция для ответа на вопрос
+bool answerQuestion(const Question &q);
+
+// Функция для проведения тестирования
+int conductTest(const Question questions[], int numQuestions);
+
+int main()
+{
+  const string filename = "questions2.txt"; // Имя файла с вопросами
+  const short MAX_QUESTIONS = 20;           // Максимальное количество вопросов
+  Question questions[MAX_QUESTIONS];
+  int numQuestions = 0;
+
+  // Проверка на чтения вопросов из файла
+  if (!readQuestionsFromFile(filename, questions, numQuestions))
+  {
+    return 1;
+  }
+
+  int score = conductTest(questions, numQuestions);
+
+  return 0;
+}
 
 // Функция для чтения вопросов из файла
-bool readQuestionsFromFile(const std::string &filename, Question questions[], int &numQuestions)
+bool readQuestionsFromFile(const string &filename, Question questions[], int &numQuestions)
 {
-  std::ifstream file(filename);
+  ifstream file(filename);
+
+  // Проверка на открытие файла
   if (!file.is_open())
   {
-    std::cerr << "Unable to open file: " << filename << std::endl;
+    cerr << "Unable to open file: " << filename << endl;
     return false;
   }
 
   numQuestions = 0;
-  while (std::getline(file, questions[numQuestions].question))
+
+  // Чтение файла
+  while (getline(file, questions[numQuestions].question))
   {
     file >> questions[numQuestions].numOptions;
     file.ignore(); // Пропускаем символ новой строки
 
     for (int i = 0; i < questions[numQuestions].numOptions; ++i)
     {
-      std::getline(file, questions[numQuestions].options[i]);
+      getline(file, questions[numQuestions].options[i]);
     }
 
-    std::getline(file, questions[numQuestions].correctAnswer); // Считываем правильный ответ
-    file >> questions[numQuestions].points;                    // Считываем количество баллов за вопрос
-    file.ignore();                                             // Пропускаем символ новой строки
+    getline(file, questions[numQuestions].correctAnswer); // Считываем правильный ответ
+    file >> questions[numQuestions].points;               // Считываем количество баллов за вопрос
+    file.ignore();                                        // Пропускаем символ новой строки
     ++numQuestions;
   }
 
@@ -48,20 +83,20 @@ bool readQuestionsFromFile(const std::string &filename, Question questions[], in
 // Функция для вывода вопроса и вариантов ответов
 void displayQuestion(const Question &q)
 {
-  std::cout << q.question << std::endl;
+  cout << q.question << endl;
   for (int i = 0; i < q.numOptions; ++i)
   {
-    std::cout << i + 1 << ". " << q.options[i] << std::endl;
+    cout << q.options[i] << endl;
   }
 }
 
 // Функция для ответа на вопрос
 bool answerQuestion(const Question &q)
 {
-  std::cout << "Enter your answer: ";
-  std::string userAnswer;
-  std::getline(std::cin, userAnswer);
-  std::cin.ignore(); // Очищаем входной буфер
+  cout << "Enter your answer: ";
+  string userAnswer;
+  getline(cin, userAnswer);
+  cin.ignore(); // Очищаем входной буфер
   return userAnswer == q.correctAnswer;
 }
 
@@ -75,36 +110,20 @@ int conductTest(const Question questions[], int numQuestions)
     displayQuestion(questions[i]);
     bool correctAnswer = answerQuestion(questions[i]);
 
+    // Проверка правильного ответа
     if (correctAnswer)
     {
-      std::cout << "Correct! You earned " << questions[i].points << " points." << std::endl;
+      cout << "Correct! You earned " << questions[i].points << " points." << endl;
       totalScore += questions[i].points;
     }
     else
     {
-      std::cout << "Incorrect! The correct answer is: " << questions[i].correctAnswer << std::endl;
+      cout << "Incorrect! The correct answer is: " << questions[i].correctAnswer << endl;
     }
 
-    std::cout << std::endl;
+    cout << endl;
   }
 
-  std::cout << "Test completed. Your total score: " << totalScore << std::endl;
+  cout << "Test completed. Your total score: " << totalScore << endl;
   return totalScore;
-}
-
-int main()
-{
-  const std::string filename = "questions2.txt"; // Имя файла с вопросами
-  const int MAX_QUESTIONS = 10;                  // Максимальное количество вопросов
-  Question questions[MAX_QUESTIONS];
-  int numQuestions = 0;
-
-  if (!readQuestionsFromFile(filename, questions, numQuestions))
-  {
-    return 1;
-  }
-
-  int score = conductTest(questions, numQuestions);
-
-  return 0;
 }
