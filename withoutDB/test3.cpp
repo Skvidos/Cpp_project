@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <locale.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -29,8 +31,10 @@ int conductTest(const Question questions[], int numQuestions);
 
 int main()
 {
-  const string filename = "questions2.txt"; // Имя файла с вопросами
-  const short MAX_QUESTIONS = 20;           // Максимальное количество вопросов
+  setlocale(LC_ALL, "ru_RU.UTF-8");
+  SetConsoleCP(1251);
+  const string filename = "questions.txt"; // Имя файла с вопросами
+  const short MAX_QUESTIONS = 20;          // Максимальное количество вопросов
   Question questions[MAX_QUESTIONS];
   int numQuestions = 0;
 
