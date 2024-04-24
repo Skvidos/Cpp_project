@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Programming\\plusis\\Cursovaya\\Cpp_project\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Programming\\plusis\\Cursovaya\\Cpp_project\\testSQL\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:testSQL\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Programming\\plusis\\Cursovaya\\Cpp_project\\withoutDB\\test3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:withoutDB\\test3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -18,11 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "test.c",
+              "DocumentMoniker": "D:\\Programming\\plusis\\Cursovaya\\Cpp_project\\testSQL\\test.c",
+              "RelativeDocumentMoniker": "testSQL\\test.c",
+              "ToolTip": "D:\\Programming\\plusis\\Cursovaya\\Cpp_project\\testSQL\\test.c",
+              "RelativeToolTip": "testSQL\\test.c",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-04-22T11:23:04.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "CppProperties.json",
               "DocumentMoniker": "D:\\Programming\\plusis\\Cursovaya\\Cpp_project\\CppProperties.json",
               "RelativeDocumentMoniker": "CppProperties.json",
@@ -30,12 +47,11 @@
               "RelativeToolTip": "CppProperties.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-18T09:31:22.09Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-18T09:31:22.09Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "test3.cpp",
               "DocumentMoniker": "D:\\Programming\\plusis\\Cursovaya\\Cpp_project\\withoutDB\\test3.cpp",
               "RelativeDocumentMoniker": "withoutDB\\test3.cpp",
