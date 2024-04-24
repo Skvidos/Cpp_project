@@ -32,7 +32,8 @@ int conductTest(const Question questions[], int numQuestions);
 int main()
 {
   setlocale(LC_ALL, "ru_RU.UTF-8");
-  SetConsoleCP(1251);
+  SetConsoleCP(CP_UTF8);                   // Установка кодовой страницы UTF-8 для ввода
+  SetConsoleOutputCP(CP_UTF8);             // Установка кодовой страницы UTF-8 для вывода
   const string filename = "questions.txt"; // Имя файла с вопросами
   const short MAX_QUESTIONS = 20;          // Максимальное количество вопросов
   Question questions[MAX_QUESTIONS];
@@ -57,7 +58,7 @@ bool readQuestionsFromFile(const string &filename, Question questions[], int &nu
   // Проверка на открытие файла
   if (!file.is_open())
   {
-    cerr << "Unable to open file: " << filename << endl;
+    cerr << "Невозможно открыть файл: " << filename << endl;
     return false;
   }
 
@@ -97,7 +98,7 @@ void displayQuestion(const Question &q)
 // Функция для ответа на вопрос
 bool answerQuestion(const Question &q)
 {
-  cout << "Enter your answer: ";
+  cout << "Введите свой ответ: ";
   string userAnswer;
   getline(cin, userAnswer);
   cin.ignore(); // Очищаем входной буфер
@@ -117,17 +118,17 @@ int conductTest(const Question questions[], int numQuestions)
     // Проверка правильного ответа
     if (correctAnswer)
     {
-      cout << "Correct! You earned " << questions[i].points << " points." << endl;
+      cout << "Правильно! Вы заработали " << questions[i].points << " баллов." << endl;
       totalScore += questions[i].points;
     }
     else
     {
-      cout << "Incorrect! The correct answer is: " << questions[i].correctAnswer << endl;
+      cout << "Неверно! Правильный ответ: " << questions[i].correctAnswer << endl;
     }
 
     cout << endl;
   }
 
-  cout << "Test completed. Your total score: " << totalScore << endl;
+  cout << "Тест завершен. Ваш общий балл: " << totalScore << endl;
   return totalScore;
 }
